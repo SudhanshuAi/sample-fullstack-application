@@ -17,15 +17,17 @@ datasource db {
 
 
 
-enum Status {
-  ACTIVE
-  INACTIVE
-  COMPLETED
-}
-
 model Todo {
   id        Int      @id @default(autoincrement())
-  title     String
+  body      String   // Change this from title to body
   status    Status
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
+enum Status {
+  PENDING
+  DONE
+}
+
 

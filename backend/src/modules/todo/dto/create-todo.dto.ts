@@ -5,9 +5,9 @@ import { ApiProperty } from "@nestjs/swagger";
 export class CreateTodoDto {
     @ApiProperty()
     @IsString()
-    body: string;
+    title: string;  // Change this from body to title
 
     @ApiProperty({type: 'enum', enum: ['PENDING', 'DONE']})
-    @IsEnum(['PENDING', 'DONE'])
+    @IsEnum(Status)
     status: Status;
 }
