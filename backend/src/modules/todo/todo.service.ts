@@ -5,11 +5,11 @@ import { PrismaService } from 'src/global/prisma/prisma.service';
 
 @Injectable()
 export class TodoService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   create(createTodoDto: CreateTodoDto) {
     return this.prisma.todo.create({
-      data: createTodoDto
+      data: createTodoDto,
     });
   }
 
@@ -19,12 +19,14 @@ export class TodoService {
 
   async findOne(id: number) {
     const todo = await this.prisma.todo.findUnique({
-      where: { id }
-    })
+      where: { id },
+    });
 
     if (!todo) {
       throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
     }
+
+    return todo;
   }
 
   async update(id: number, updateTodoDto: UpdateTodoDto) {
@@ -32,15 +34,15 @@ export class TodoService {
 
     return this.prisma.todo.update({
       where: { id },
-      data: updateTodoDto
-    })
+      data: updateTodoDto,
+    });
   }
 
   async remove(id: number) {
     await this.findOne(id);
 
-    return this.prisma.todo.delete({ 
-      where: { id } 
-    })
+    return this.prisma.todo.delete({
+      where: { id },
+    });
   }
 }

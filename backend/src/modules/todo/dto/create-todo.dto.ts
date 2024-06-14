@@ -1,13 +1,17 @@
-import { IsEnum, IsString } from "class-validator";
-import { Status } from "@prisma/client";
-import { ApiProperty } from "@nestjs/swagger";
+import { IsEnum, IsString } from 'class-validator';
+import { Status } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTodoDto {
-    @ApiProperty()
-    @IsString()
-    title: string;  // Change this from body to title
+  @ApiProperty()
+  @IsString()
+  title: string; // Add title property
 
-    @ApiProperty({type: 'enum', enum: ['PENDING', 'DONE']})
-    @IsEnum(Status)
-    status: Status;
+  @ApiProperty()
+  @IsString()
+  body: string;
+
+  @ApiProperty({ type: 'enum', enum: Status })
+  @IsEnum(Status)
+  status: Status;
 }
