@@ -18,13 +18,14 @@ datasource db {
 
 
 enum Status {
-  PENDING
-  DONE
+  ACTIVE
+  INACTIVE
+  COMPLETED
 }
 
 model Todo {
-    id     Int    @id @default(autoincrement())
-    body   String 
-    status Status @default(PENDING)
+  id        Int      @id @default(autoincrement())
+  title     String
+  status    Status
 }
 
