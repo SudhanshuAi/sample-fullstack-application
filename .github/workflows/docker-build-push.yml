@@ -19,8 +19,8 @@ jobs:
       - name: Build and push backend Docker image
         working-directory: ./backend  # Adjust path to your backend Dockerfile
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }} .
-          docker push ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
+          docker build -t ghcr.io/sudhanshuai/backend:${{ github.sha }} .
+          docker push ghcr.io/sudhanshuai/backend:${{ github.sha }}
 
   frontend:
     name: Build and Push Frontend Image
@@ -35,5 +35,5 @@ jobs:
       - name: Build and push frontend Docker image
         working-directory: ./frontend  # Adjust path to your frontend Dockerfile
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }} .
-          docker push ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }}
+          docker build -t ghcr.io/sudhanshuai/frontend:${{ github.sha }} .
+          docker push ghcr.io/sudhanshuai/frontend:${{ github.sha }}
