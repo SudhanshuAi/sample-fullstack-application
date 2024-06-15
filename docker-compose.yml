@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: ghcr.io/sudhanshuai/backend:latest
+    image: ghcr.io/sudhanshuai/backend:latest  # your repo name instead of sudhanshuai
     environment:
       - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/postgres  # your database url
       - REDIS_URL=redis://redis:6379
@@ -13,7 +13,7 @@ services:
       - redis
 
   frontend:
-    image: ghcr.io/sudhanshuai/frontend:latest
+    image: ghcr.io/sudhanshuai/frontend:latest  # your repo name instead of sudhanshuai
     environment:
       - NEXT_PUBLIC_BACKEND_BASE_URL=http://backend:3000
     ports:
