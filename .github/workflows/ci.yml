@@ -1,4 +1,3 @@
-# .github/workflows/ci.yml
 name: CI Pipeline
 
 on:
@@ -24,27 +23,27 @@ jobs:
 
     - name: Install backend dependencies
       run: npm install
-      working-directory: ./backend 
+      working-directory: ./backend
 
     - name: Build backend
       run: npm run build
-      working-directory: ./backend 
+      working-directory: ./backend
 
     - name: Run backend tests
       run: npm test
-      working-directory: ./backend 
+      working-directory: ./backend
 
     - name: Install frontend dependencies
       run: npm install
-      working-directory: ./frontend 
+      working-directory: ./frontend
 
     - name: Build frontend
       run: npm run build
-      working-directory: ./frontend 
+      working-directory: ./frontend
 
     - name: Run frontend tests
       run: npm test
-      working-directory: ./frontend 
+      working-directory: ./frontend
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -53,14 +52,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        username: sudhanshuai
+        password: ${{ secrets.GHCR_PAT }}
 
     - name: Build and push backend Docker image
       uses: docker/build-push-action@v3
       with:
-        context: ./backend 
-        file: ./backend/Dockerfile 
+        context: ./backend
+        file: ./backend/Dockerfile
         push: true
         tags: |
           ghcr.io/sudhanshuai/backend:latest
@@ -69,8 +68,8 @@ jobs:
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v3
       with:
-        context: ./frontend 
-        file: ./frontend/Dockerfile 
+        context: ./frontend
+        file: ./frontend/Dockerfile
         push: true
         tags: |
           ghcr.io/sudhanshuai/frontend:latest
