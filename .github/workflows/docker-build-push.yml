@@ -26,10 +26,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
+      - name: Convert repository owner to lowercase
+        id: lowercase_owner
+        run: |
+          echo "::set-output name=owner::$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')"
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
       - name: Build and push backend image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner | lower }}/backend:${{ github.sha }} ./backend
-          docker push ghcr.io/${{ github.repository_owner | lower }}/backend:${{ github.sha }}
+          docker build -t ghcr.io/${{ steps.lowercase_owner.outputs.owner }}/backend:${{ github.sha }} ./backend
+          docker push ghcr.io/${{ steps.lowercase_owner.outputs.owner }}/backend:${{ github.sha }}
 
   build-and-push-frontend:
     runs-on: ubuntu-latest
@@ -51,7 +58,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
+      - name: Convert repository owner to lowercase
+        id: lowercase_owner
+        run: |
+          echo "::set-output name=owner::$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')"
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
       - name: Build and push frontend image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner | lower }}/frontend:${{ github.sha }} ./frontend
-          docker push ghcr.io/${{ github.repository_owner | lower }}/frontend:${{ github.sha }}
+          docker build -t ghcr.io/${{ steps.lowercase_owner.outputs.owner }}/frontend:${{ github.sha }} ./frontend
+          docker push ghcr.io/${{ steps.lowercase_owner.outputs.owner }}/frontend:${{ github.sha }}
