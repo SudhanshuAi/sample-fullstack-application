@@ -24,27 +24,27 @@ jobs:
 
     - name: Install backend dependencies
       run: npm install
-      working-directory: ./backend # Adjust path if necessary
+      working-directory: ./backend 
 
     - name: Build backend
       run: npm run build
-      working-directory: ./backend # Adjust path if necessary
+      working-directory: ./backend 
 
     - name: Run backend tests
       run: npm test
-      working-directory: ./backend # Adjust path if necessary
+      working-directory: ./backend 
 
     - name: Install frontend dependencies
       run: npm install
-      working-directory: ./frontend # Adjust path if necessary
+      working-directory: ./frontend 
 
     - name: Build frontend
       run: npm run build
-      working-directory: ./frontend # Adjust path if necessary
+      working-directory: ./frontend 
 
     - name: Run frontend tests
       run: npm test
-      working-directory: ./frontend # Adjust path if necessary
+      working-directory: ./frontend 
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -59,8 +59,8 @@ jobs:
     - name: Build and push backend Docker image
       uses: docker/build-push-action@v3
       with:
-        context: ./backend # Adjust path if necessary
-        file: ./backend/Dockerfile # Adjust path if necessary
+        context: ./backend 
+        file: ./backend/Dockerfile 
         push: true
         tags: |
           ghcr.io/${{ github.repository_owner }}/backend:latest
@@ -69,8 +69,8 @@ jobs:
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v3
       with:
-        context: ./frontend # Adjust path if necessary
-        file: ./frontend/Dockerfile # Adjust path if necessary
+        context: ./frontend 
+        file: ./frontend/Dockerfile 
         push: true
         tags: |
           ghcr.io/${{ github.repository_owner }}/frontend:latest
