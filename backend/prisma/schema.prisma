@@ -12,7 +12,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:mysecretpassword@postgres:5432/postgres"  # replace with your database url
+  url      = "postgresql://postgres:mysecretpassword@postgres:5432/postgres"
 }
 
 
