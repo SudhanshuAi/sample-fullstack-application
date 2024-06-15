@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
+    - name: Install backend dependencies
       run: npm install
       working-directory: ./backend # Adjust path if necessary
 
@@ -62,7 +62,9 @@ jobs:
         context: ./backend # Adjust path if necessary
         file: ./backend/Dockerfile # Adjust path if necessary
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/backend:latest
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/backend:latest
+          ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
 
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v3
@@ -70,4 +72,6 @@ jobs:
         context: ./frontend # Adjust path if necessary
         file: ./frontend/Dockerfile # Adjust path if necessary
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/frontend:latest
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/frontend:latest
+          ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }}
