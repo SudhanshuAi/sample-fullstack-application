@@ -28,8 +28,8 @@ jobs:
 
       - name: Build and push backend image
         run: |
-          docker build -t ghcr.io/sudhanshuai/backend:${{ github.sha }} ./backend
-          docker push ghcr.io/sudhanshuai/backend:${{ github.sha }}
+          docker build -t ghcr.io/${{ github.repository_owner | lower }}/backend:${{ github.sha }} ./backend
+          docker push ghcr.io/${{ github.repository_owner | lower }}/backend:${{ github.sha }}
 
   build-and-push-frontend:
     runs-on: ubuntu-latest
@@ -53,5 +53,5 @@ jobs:
 
       - name: Build and push frontend image
         run: |
-          docker build -t ghcr.io/sudhanshuai/frontend:${{ github.sha }} ./frontend
-          docker push ghcr.io/sudhanshuai/frontend:${{ github.sha }}
+          docker build -t ghcr.io/${{ github.repository_owner | lower }}/frontend:${{ github.sha }} ./frontend
+          docker push ghcr.io/${{ github.repository_owner | lower }}/frontend:${{ github.sha }}

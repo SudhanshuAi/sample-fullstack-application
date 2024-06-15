@@ -52,7 +52,7 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
-        username: sudhanshuai
+        username: ${{ github.repository_owner | lower }}
         password: ${{ secrets.GHCR_PAT }}
 
     - name: Build and push backend Docker image
@@ -62,8 +62,8 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ghcr.io/sudhanshuai/backend:latest
-          ghcr.io/sudhanshuai/backend:${{ github.sha }}
+          ghcr.io/${{ github.repository_owner | lower }}/backend:latest
+          ghcr.io/${{ github.repository_owner | lower }}/backend:${{ github.sha }}
 
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v3
@@ -72,5 +72,5 @@ jobs:
         file: ./frontend/Dockerfile
         push: true
         tags: |
-          ghcr.io/sudhanshuai/frontend:latest
-          ghcr.io/sudhanshuai/frontend:${{ github.sha }}
+          ghcr.io/${{ github.repository_owner | lower }}/frontend:latest
+          ghcr.io/${{ github.repository_owner | lower }}/frontend:${{ github.sha }}
